@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 const cinemaSchema = new Schema({
+  _id: mongoose.Types.ObjectId,
   id: Number,
   label: String,
   cinema: String,

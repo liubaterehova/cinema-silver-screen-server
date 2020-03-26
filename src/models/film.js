@@ -1,19 +1,12 @@
 import mongoose, { Schema } from 'mongoose';
 
 const filmSchema = new Schema({
+  _id: mongoose.Schema.Types.ObjectId,
   id: Number,
-  src: String,
   name: String,
+  poster: String,
   type: String,
-  city: String,
-  cityCode: String,
-  date: String,
-  dateCode: String,
   description: String,
-  cinema: String,
-  time: String,
-  hour: Number,
-  emptySeats: Number,
 });
 
-export const Film = mongoose.model('films', filmSchema, 'films');
+export const Film = mongoose.model('film', filmSchema, 'films');
