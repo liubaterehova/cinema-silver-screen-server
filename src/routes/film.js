@@ -3,16 +3,16 @@ import mongoose from 'mongoose';
 
 export const filmRouter = express.Router();
 
-filmRouter.get('/api/v1/films', async (req, response) => {
+filmRouter.get('/', async (req, response) => {
   const { connection } = mongoose;
 
   connection.collection('films').find({}).toArray((err, result) => {
-    if (err) throw err;
+    if (err) throw response.sendStatus(400).send(err);
     response.status(200).json(result);
   });
 });
 
-filmRouter.get('/api/v1/films/:filmId', async (req, response) => {
+filmRouter.get('/:filmId', async (req, response) => {
   const { connection } = mongoose;
 
   const filmId = new mongoose.Types.ObjectId(req.params.filmId);
