@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ext js,jsx src",
-    "build:server:dev": "webpack --config ./resources/webpack/webpack.server.js -w",
-    "start:server": "node ./dist/server.js",
+    "build": "webpack --config ./resources/webpack/webpack.server.js -w",
+    "start": "node ./dist/server.js --inspect",
     "create:database": "node ./dist/populate.js"
   },
   "author": "Liuba Terehova",
@@ -15,6 +15,7 @@
   "dependencies": {
     "@babel/core": "^7.9.0",
     "babel-loader": "^8.1.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "clean-webpack-plugin": "^3.0.0",
     "cookie-parser": "^1.4.5",
@@ -25,9 +26,11 @@
     "eslint-plugin-babel": "^5.3.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.5",
     "morgan": "^1.10.0",
     "path": "^0.12.7",
+    "validator": "^13.0.0",
     "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
