@@ -6,10 +6,15 @@ export const filmRouter = express.Router();
 filmRouter.get('/', async (req, response) => {
   const { connection } = mongoose;
 
-  connection.collection('films').find({}).toArray((err, result) => {
-    if (err) throw response.sendStatus(400).send(err);
-    response.status(200).json(result);
-  });
+  const films = await connection.collection('films').find({}).toArray();
+
+  if (!films.length) {
+    response.status(404).send(films);
+
+    return;
+  }
+
+  response.status(200).send(films);
 });
 
 filmRouter.get('/:filmId', async (req, response) => {
@@ -18,5 +23,11 @@ filmRouter.get('/:filmId', async (req, response) => {
   const filmId = new mongoose.Types.ObjectId(req.params.filmId);
   const result = await connection.collection('films').findOne({ _id: filmId });
 
-  response.status(200).json(result);
+  if (!result) {
+    response.status(404).send();
+
+    return;
+  }
+
+  response.status(200).send(result);
 });

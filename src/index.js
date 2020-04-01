@@ -8,6 +8,7 @@ import 'express-async-errors';
 import { cinemaRouter } from './routes/cinema';
 import { filmRouter } from './routes/film';
 import { sessionRouter } from './routes/session';
+import { usersRouter } from './routes/users';
 
 const app = express();
 const port = process.env.PORT || 3010;
@@ -23,9 +24,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/v1/films/', filmRouter);
-app.use('/api/v1/cinemas/', cinemaRouter);
-app.use('/api/v1/sessions/', sessionRouter);
+app.use('/films/', filmRouter);
+app.use('/cinemas/', cinemaRouter);
+app.use('/sessions/', sessionRouter);
+app.use('/users/', usersRouter);
 
 app.use((err, req, res, next) => {
   // eslint-disable-next-line no-console
