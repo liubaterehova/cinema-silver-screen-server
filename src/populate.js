@@ -15,22 +15,22 @@ const f = async () => {
 
   await connection.db.dropDatabase();
 
-  await Promise.All(FILMS.map(async (filmData) => {
+  await Promise.all(FILMS.map(async (filmData) => {
     const film = new Film(filmData);
 
     await film.save();
   }));
 
-  await Promise.All(CINEMAS.map(async (cinemaData) => {
+  await Promise.all(CINEMAS.map(async (cinemaData) => {
     const cinema = new Cinema(cinemaData);
 
     await cinema.save();
   }));
 
-  await Promise.All(SESSIONS.map(async (sessionData) => {
+  await Promise.all(SESSIONS.map(async (sessionData) => {
     const session = new Session(sessionData);
 
-    session.save();
+    await session.save();
   }));
 
   mongoose.disconnect();
