@@ -72,7 +72,6 @@
         "jsx": "never"
       }
     ],
-    "no-console": "error",
     "no-multiple-empty-lines": [
       "error",
       {

@@ -8,6 +8,7 @@ cinemaRouter.get('/', async (req, response) => {
 
   connection.collection('cinemas').find({}).toArray((err, result) => {
     if (err) throw err;
-    response.status(200).json(result);
+
+    response.status(200).send(result);
   });
 });
