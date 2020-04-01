@@ -6,9 +6,13 @@ export const cinemaRouter = new express.Router();
 cinemaRouter.get('/', async (req, response) => {
   const { connection } = mongoose;
 
-  connection.collection('cinemas').find({}).toArray((err, result) => {
-    if (err) throw err;
+  const result = await connection.collection('cinemas').find({}).toArray();
 
-    response.status(200).send(result);
-  });
+  if (!result.length) {
+    response.status(404).send(result);
+
+    return;
+  }
+
+  response.status(200).send(result);
 });

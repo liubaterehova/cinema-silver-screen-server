@@ -25,5 +25,11 @@ sessionRouter.get('/', async (req, response) => {
     session.cinema = await connection.collection('cinemas').findOne({ _id: session.cinemaId });
   }));
 
+  if (!sessions.length) {
+    response.status(404).send(sessions);
+
+    return;
+  }
+
   response.status(200).send(sessions);
 });

@@ -32,12 +32,13 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         include: [path.resolve('src')],
-        use: [{
-          loader: 'babel-loader',
-        },
-        {
-          loader: 'eslint-loader',
-        },
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+          {
+            loader: 'eslint-loader',
+          },
         ],
       },
     ],
