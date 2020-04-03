@@ -1,17 +1,17 @@
 import mongoose, { Schema } from 'mongoose';
 import validator from 'validator';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 
 const userSchema = Schema(
   {
-    name: {
+    userName: {
       type: String,
       required: true,
       trim: true,
     },
     email: {
       type: String,
-      required: true,
       trim: true,
       lowercase: true,
       unique: true,
@@ -63,6 +63,29 @@ userSchema.methods.generateAuthToken = async function authToken() {
   await user.save();
 
   return token;
+};
+
+userSchema.statics.findByCredentialsSignIn = async function findByCredentialsSignIn(userName, password) {
+  const User = this;
+  const user = await User.findOne({ userName });
+
+  if (!user) return null;
+  const isMatch = await bcrypt.compare(password, user.password);
+
+  if (!isMatch) return null;
+
+  return user;
+};
+
+userSchema.statics.findByCredentialsSignUp = async function findByCredentialsSignUp(userName, email) {
+  const User = this;
+  const user = await User.findOne({ userName });
+  const userEmail = await User.findOne({ email });
+
+  if (user) return 'name';
+  if (userEmail) return 'email';
+
+  return null;
 };
 
 export const User = mongoose.model('User', userSchema);
