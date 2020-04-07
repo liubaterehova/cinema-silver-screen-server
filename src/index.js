@@ -30,8 +30,6 @@ app.use('/sessions/', sessionRouter);
 app.use('/users/', usersRouter);
 
 app.use((err, req, res, next) => {
-  // eslint-disable-next-line no-console
-  console.error(err);
   res.status(500).send('Something broke!');
   next(err);
 });
